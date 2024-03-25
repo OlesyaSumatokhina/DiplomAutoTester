@@ -1,15 +1,8 @@
-
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import lombok.val;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 
+import java.time.Duration;
+import java.util.List;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$;
@@ -87,6 +80,4 @@ public class DashboardPage {
     public void pushСontinueButton(){
         $$(".button__content").find(exactText("Продолжить")).click();
     }
-
-
 }
