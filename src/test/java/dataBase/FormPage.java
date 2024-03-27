@@ -1,20 +1,25 @@
-import com.codeborne.selenide.Condition;
+package dataBase;
+
+import com.codeborne.selenide.Selectors;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
 import java.util.List;
+
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.open;
-public class DashboardPage {
+import static com.codeborne.selenide.Selenide.*;
+
+public class FormPage {
+
     private static String url = System.getProperty("db.url");
     private static String appURL = System.getProperty("app.url");
     private static String appPORT = System.getProperty("app.port");
     private static String userDB = System.getProperty("app.userDB");
     private static String password = System.getProperty("app.password");
 
-    List<SelenideElement> input = $$(".input__control");
+    List<SelenideElement> input = Selenide.$$(".input__control");
     SelenideElement cardNumber = input.get(0);
     SelenideElement month = input.get(1);
     SelenideElement year = input.get(2);
@@ -22,23 +27,23 @@ public class DashboardPage {
     SelenideElement cvcOrCvvNumber = input.get(4);
 
     public void buyForYourMoney() {
-        open(appURL +":"+appPORT);
+        open(appURL + ":" + appPORT);
         $$(".button__content").find(exactText("Купить")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Оплата по карте")).shouldBe(visible);
     }
 
-    public void buyOnCredit(){
-        open(appURL +":"+appPORT);
+    public void buyOnCredit() {
+        open(appURL + ":" + appPORT);
         $$(".button__content").find(exactText("Купить в кредит")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Кредит по данным карты")).shouldBe(visible);
     }
 
     public void checkMessageSuccess() {
-        $$(".notification__content").find(exactText("Операция одобрена Банком.")).shouldBe(visible);
+        $(Selectors.withText("Операция одобрена Банком")).shouldBe(visible);
     }
 
     public void checkMessageError() {
-        $$(".notification__title").find(exactText("Ошибка")).shouldBe(Condition.visible, Duration.ofSeconds(10));
+        $$(".notification__title").find(exactText("Ошибка")).shouldBe(visible, Duration.ofSeconds(10));
     }
 
     public void checkMessageWrongFormat() {
@@ -77,7 +82,8 @@ public class DashboardPage {
         cvcOrCvvNumber.setValue(cCvv);
     }
 
-    public void pushСontinueButton(){
+    public void pushСontinueButton() {
         $$(".button__content").find(exactText("Продолжить")).click();
     }
+
 }

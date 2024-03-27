@@ -1,13 +1,16 @@
+package dataBase;
+
+import dataBase.Credit;
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.junit.jupiter.api.Assertions;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Utilits {
+public class DBUtils {
     private static String url = System.getProperty("db.url");
     private static String appURL = System.getProperty("app.url");
     private static String appPORT = System.getProperty("app.port");
@@ -22,19 +25,20 @@ public class Utilits {
         runner.update(conn, "DELETE FROM order_entity;");
     }
 
-    public static void paymentStatus(Status status) throws SQLException {
+    public static void checkPaymentStatus(Status status) throws SQLException {
         val runner = new QueryRunner();
         val conn = DriverManager.getConnection(url, userDB, password);
         val paymentDataSQL = "SELECT status FROM payment_entity;";
         val payment = runner.query(conn, paymentDataSQL, new BeanHandler<>(Payment.class));
-        assertEquals(status, payment.status);
+        Assertions.assertEquals(status, payment.status);
     }
 
-    public static void creditStatus(Status status) throws SQLException {
+   public static void checkCreditStatus(Status status) throws SQLException {
         val runner = new QueryRunner();
-        val conn = DriverManager.getConnection(url, userDB, password);
+       val conn = DriverManager.getConnection(url, userDB, password);
         val creditDataSQL = "SELECT status FROM credit_request_entity;";
         val credit = runner.query(conn, creditDataSQL, new BeanHandler<>(Credit.class));
-        assertEquals(status, credit.status);
-    }
+        Assertions.assertEquals(status, credit.status);
+   }
+
 }
