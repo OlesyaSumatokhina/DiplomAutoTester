@@ -8,8 +8,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 
 
-class TestPayMyPayment {
-
+public class TestPayCreditCard {
     private FormPage formPage;
 
     @BeforeEach
@@ -33,48 +32,48 @@ class TestPayMyPayment {
     }
 
     @Test
-    @DisplayName("Payment by approved card, regular purchase, valid details")
-    void shouldPayByApprovedCard() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by approved card, purchase on credit, valid data")
+    void shouldPayByApprovedCardCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
-        formPage.setCardYear("25");
+        formPage.setCardYear("26");
         formPage.setCardOwner("Irina Ivanova");
-        formPage.setCardCVV("999");
+        formPage.setCardCVV("456");
         formPage.pushСontinueButton();
         formPage.checkMessageSuccess();
     }
 
     @Test
-    @DisplayName("Payment using an unapproved card, regular purchase with valid data")
-    void shouldPayByDeclinedCard() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment with an inactive card, purchase on credit, valid data")
+    void shouldPayByDeclinedCardCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444442");
-        formPage.setCardMonth("04");
+        formPage.setCardMonth("08");
         formPage.setCardYear("26");
         formPage.setCardOwner("Irina Ivanova");
-        formPage.setCardCVV("345");
+        formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageError();
     }
 
     @Test
-    @DisplayName("Payment using an unknown card, regular purchase with valid data")
-    void shouldPayBynUnkCard() {
-        formPage.buyForYourMoney();
-        formPage.setCardNumber("4444444444444444");
-        formPage.setCardMonth("04");
+    @DisplayName("Payment with an unknown card, purchase on credit, valid data")
+    void shouldPayUnknownCardCredit() {
+        formPage.buyOnCredit();
+        formPage.setCardNumber("4444444444444443");
+        formPage.setCardMonth("08");
         formPage.setCardYear("26");
         formPage.setCardOwner("Irina Ivanova");
-        formPage.setCardCVV("345");
+        formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageError();
     }
 
     @Test
-    @DisplayName("Payment using a card with an invalid number, regular purchase")
-    void shouldPayInvalidNumberCard() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an invalid card number, purchase on credit")
+    void shouldPayInvalidCardNumberCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("444444444444AAAA");
         formPage.setCardMonth("04");
         formPage.setCardYear("26");
@@ -85,9 +84,9 @@ class TestPayMyPayment {
     }
 
     @Test
-    @DisplayName("Payment by card with an invalid month number, regular purchase")
-    void showPayBadMonth() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an invalid month number, purchase on credit")
+    void shouldPayInvalidMonthCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("15");
         formPage.setCardYear("26");
@@ -95,13 +94,12 @@ class TestPayMyPayment {
         formPage.setCardCVV("345");
         formPage.pushСontinueButton();
         formPage.checkMessageWrongDate();
-
     }
 
     @Test
-    @DisplayName("Payment by card with invalid year number, approved card")
-    void showPayBadYearNumber() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an invalid year number, purchase on credit")
+    void shouldPayInvalidYearCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("22");
@@ -112,9 +110,9 @@ class TestPayMyPayment {
     }
 
     @Test
-    @DisplayName("Payment by card with an invalid field owner, approved card")
-    void showPayBadOwner() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an invalid owner, purchase on credit")
+    void shouldPayInvalidCardOwnerCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("25");
@@ -125,9 +123,9 @@ class TestPayMyPayment {
     }
 
     @Test
-    @DisplayName("Payment by card with an invalid CVV field, approved card")
-    void showPayBadCVC() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an invalid CVV, purchase on credit")
+    void shouldPayInvalidCVVCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("25");
@@ -138,9 +136,9 @@ class TestPayMyPayment {
     }
 
     @Test
-    @DisplayName("Payment for a tour with an empty card number, regular purchase")
-    void showPayWithEmplyCardNumber() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an empty card number, purchase on credit")
+    void shouldPayEmptyCardNumberCredit() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("");
         formPage.setCardMonth("08");
         formPage.setCardYear("25");
@@ -151,9 +149,9 @@ class TestPayMyPayment {
     }
 
     @Test
-    @DisplayName("Payment for a tour with an empty card month, regular purchase")
-    void showPayWithEmplyCardMonth() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an empty card month, purchase on credit")
+    void shouldPayEmptyCardNumberMonth() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("");
         formPage.setCardYear("25");
@@ -161,13 +159,12 @@ class TestPayMyPayment {
         formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageWrongFormat();
-
     }
 
     @Test
-    @DisplayName("Payment for a tour with an empty card year, regular purchase")
-    void showPayWithEmplyCardYear() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an empty card year, purchase on credit")
+    void shouldPayEmptyCardNumberYear() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("");
@@ -175,13 +172,12 @@ class TestPayMyPayment {
         formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageWrongFormat();
-
     }
 
     @Test
-    @DisplayName("Payment for a tour with an empty card owner, regular purchase")
-    void showPayWithEmplyCardOwner() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an empty card owner, purchase on credit")
+    void shouldPayEmptyCardNumberOwner() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("25");
@@ -189,13 +185,12 @@ class TestPayMyPayment {
         formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageRequiredField();
-
     }
 
     @Test
-    @DisplayName("Payment for a tour with an empty card owner, regular purchase")
-    void showPayWithEmplyCardCVV() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment by card with an empty card CVV, purchase on credit")
+    void shouldPayEmptyCardNumberCVV() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("25");
@@ -203,28 +198,26 @@ class TestPayMyPayment {
         formPage.setCardCVV("");
         formPage.pushСontinueButton();
         formPage.checkMessageWrongFormat();
-
     }
 
     @Test
-    @DisplayName(" Payment using an approved card, regular purchase, valid data, checking the database entry")
-    void showPayAndEntryDB() {
-        formPage.buyForYourMoney();
+    @DisplayName("Payment using an approved card, purchase on credit, valid data, checking the database entry")
+    void shouldPayByApprovedCardCreditStatusDB() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("26");
-        formPage.setCardOwner("Irina Ivanova");
+        formPage.setCardOwner("Ivan Petrov");
         formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageSuccess();
-        DBUtils.checkPaymentStatus(Status.APPROVED);
+        DBUtils.checkCreditStatus(Status.APPROVED);
     }
 
     @Test
-    @DisplayName(" Payment with an unapproved card, regular purchase, valid data, checking the database entry")
-    void showPayUnapprovedCardAndEntryDB() {
-
-        formPage.buyForYourMoney();
+    @DisplayName("Payment with an unapproved card, purchase on credit, valid data, checking the database entry")
+    void shouldPayUnapprovedCardCreditStatusDB() {
+        formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444442");
         formPage.setCardMonth("08");
         formPage.setCardYear("26");
@@ -232,6 +225,6 @@ class TestPayMyPayment {
         formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageSuccess();
-        DBUtils.checkPaymentStatus(Status.DECLINED);
+        DBUtils.checkCreditStatus(Status.DECLINED);
     }
 }
