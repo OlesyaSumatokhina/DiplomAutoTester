@@ -13,6 +13,7 @@ public class DBUtils {
     private static String url = System.getProperty("db.url");
     private static String userDB = System.getProperty("app.userDB");
     private static String password = System.getProperty("app.password");
+
 @SneakyThrows
     public static void clearAllData() {
         var runner = new QueryRunner();
