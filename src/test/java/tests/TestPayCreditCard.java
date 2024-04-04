@@ -207,7 +207,7 @@ public class TestPayCreditCard {
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("08");
         formPage.setCardYear("26");
-        formPage.setCardOwner("Ivan Petrov");
+        formPage.setCardOwner("Irina Ivanova");
         formPage.setCardCVV("654");
         formPage.pushСontinueButton();
         formPage.checkMessageSuccess();
@@ -221,7 +221,7 @@ public class TestPayCreditCard {
         formPage.setCardNumber("4444444444444442");
         formPage.setCardMonth("08");
         formPage.setCardYear("26");
-        formPage.setCardOwner("Irina Petrova");
+        formPage.setCardOwner("Irina Ivanova");
         formPage.setCardCVV("432");
         formPage.pushСontinueButton();
         formPage.checkMessageSuccess();
