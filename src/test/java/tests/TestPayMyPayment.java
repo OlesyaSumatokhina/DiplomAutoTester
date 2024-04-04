@@ -221,15 +221,14 @@ class TestPayMyPayment {
     }
 
     @Test
-    @DisplayName(" Payment with an unapproved card, regular purchase, valid data, checking the database entry")
-    void showPayUnapprovedCardAndEntryDB() {
-
+    @DisplayName("Payment inactive card, regular purchase, valid data, checking database entries")
+    void shouldNoPayByDeclinedCardStatusInDB() {
         formPage.buyForYourMoney();
         formPage.setCardNumber("4444444444444442");
         formPage.setCardMonth("08");
         formPage.setCardYear("26");
         formPage.setCardOwner("Irina Petrova");
-        formPage.setCardCVV("654");
+        formPage.setCardCVV("543");
         formPage.pushСontinueButton();
         formPage.checkMessageSuccess();
         DBUtils.checkPaymentStatus(Status.DECLINED);

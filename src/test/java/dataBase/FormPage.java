@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class FormPage {
 
-    private static String url = System.getProperty("db.url");
+
     private static String appURL = System.getProperty("app.url");
     private static String appPORT = System.getProperty("app.port");
     List<SelenideElement> input = Selenide.$$(".input__control");

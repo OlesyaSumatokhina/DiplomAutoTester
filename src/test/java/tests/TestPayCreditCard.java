@@ -215,14 +215,14 @@ public class TestPayCreditCard {
     }
 
     @Test
-    @DisplayName("Payment with an unapproved card, purchase on credit, valid data, checking the database entry")
-    void shouldPayUnapprovedCardCreditStatusDB() {
+    @DisplayName("Payment inactive card, purchase on credit, valid data, checking the database entry")
+    void shouldPayByDeclinedCardInCreditStatusInDB() {
         formPage.buyOnCredit();
         formPage.setCardNumber("4444444444444442");
         formPage.setCardMonth("08");
         formPage.setCardYear("26");
         formPage.setCardOwner("Irina Petrova");
-        formPage.setCardCVV("654");
+        formPage.setCardCVV("432");
         formPage.pushСontinueButton();
         formPage.checkMessageSuccess();
         DBUtils.checkCreditStatus(Status.DECLINED);

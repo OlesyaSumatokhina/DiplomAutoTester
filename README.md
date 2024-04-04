@@ -16,8 +16,10 @@ __Инструкция по запуску__
 6. Выбрать там базу данных (на выбор MSQL или PostgreSQL);
 7. Создать новое соединение с базой данных, проверить тестовое подключение;
 8. В терминале IDEA запустить приложение командой <code>java -jar aqa-shop.jar</code>;
-9. Запустить тесты командой в терминале: 
-**для MSQL <code>./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app"</code>
-для postgresql <code>./gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"</code>;
+9. Запустить тесты командой в терминале:
+
+**для MSQL** <code>./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app"</code>
+
+**для postgresql** <code>./gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"</code>;
 10. Запустить формирование отчета, с одновременным открытием в браузере командой в терминале <code>./gradlew allureServe</code>;
 11. Посмотреть сформировавшийся отчет в браузере.
